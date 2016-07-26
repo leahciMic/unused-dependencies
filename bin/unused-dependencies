@@ -1,0 +1,40 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependecies
+ */
+const program = require('commander');
+const pkg = require('../package.json');
+const unusedDeps = require('../lib/unused-dependencies.js');
+const colors = require('colors/safe');
+
+const version = pkg.version;
+
+program
+  .version(version)
+  .usage('[options] [path/to/package.json]')
+  // .option('-o, --output <output>', 'Specify output (all|used|unused) (default to all)', 'all')
+  // .option('-f, --filter <file filter>', 'Specify glob file filter (default to *.js)', '*.js')
+  .parse(process.argv);
+
+const packageJsonPath = program.args.shift() || './package.json';
+
+unusedDeps({ packageJsonPath, glob: '**/*.js' })
+  .catch(err => {
+    console.error(err);
+  })
+  .then(dependencies => {
+    if (dependencies.unused.length) {
+      console.log('Unused dependencies');
+      console.log(dependencies.unused.map(x => ` * ${colors.red(x)}`).join('\n'));
+    }
+
+    if (dependencies.extra.length) {
+      console.log('Extra dependencies');
+      console.log(dependencies.extra.map(x => ` * ${x}`).join('\n'));
+    }
+
+    if (dependencies.extra.length + dependencies.unused.length === 0) {
+      console.log('No unused or extra dependencies found');
+    }
+  });

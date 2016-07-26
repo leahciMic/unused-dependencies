@@ -1,0 +1,34 @@
+{
+  "name": "unused-dependencies",
+  "version": "1.0.0",
+  "description": "Check for unused or extra dependencies",
+  "main": "index.js",
+  "bin": {
+    "unused-deps": "./bin/unused-dependencies"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:leahciMic/unused-dependencies.git"
+  },
+  "keywords": [],
+  "author": "Michael Leaney <leahcimic@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "colors": "^1.1.2",
+    "commander": "^2.9.0",
+    "detective": "^4.3.1",
+    "detective-es6": "^1.1.5",
+    "detective-module": "github:leahcimic/node-detective-module#all-of-es6-and-commonjs",
+    "glob": "^7.0.5",
+    "lodash": "^4.14.0",
+    "promise-each-concurrency": "^1.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.1.1",
+    "eslint-config-airbnb-base": "^5.0.0",
+    "eslint-plugin-import": "^1.11.1"
+  }
+}
